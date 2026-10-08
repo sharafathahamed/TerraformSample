@@ -1,0 +1,6 @@
+location              = "East US"
+resource_group_name   = "terraform-rg"
+vm_name               = "webserver-vm"
+admin_username        = "azureadmin"
+admin_password        = "YourStrongPassword123!"
+storage_account_name  = "webstorage12345"

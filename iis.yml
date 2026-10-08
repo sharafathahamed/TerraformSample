@@ -1,0 +1,32 @@
+---
+- name: Install IIS Web Server
+  hosts: windows
+  gather_facts: no
+
+  tasks:
+
+    - name: Install IIS
+      ansible.windows.win_feature:
+        name: Web-Server
+        state: present
+        include_sub_features: true
+        include_management_tools: true
+
+    - name: Create IIS web page
+      ansible.windows.win_copy:
+        content: |
+          <html>
+          <head>
+            <title>IIS Web Server</title>
+          </head>
+          <body>
+            <h1>Hello from IIS Web Server</h1>
+          </body>
+          </html>
+        dest: C:\inetpub\wwwroot\index.html
+
+    - name: Start IIS service
+      ansible.windows.win_service:
+        name: W3SVC
+        state: started
+        start_mode: auto
